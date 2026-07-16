@@ -47,84 +47,86 @@ const CLIENTS = [
 ];
 
 // ✅ DATA GALERI PROYEK — tambahkan foto hasil proyek di sini
+//    Ganti URL dengan gambar lokal: image: '/assets/images/nama-file.png'
 const PROJECT_GALLERY = [
   {
     id: 1,
     title: 'Fabrikasi Struktur Baja',
     category: 'Fabrikasi',
-    image: 'https://image.qwenlm.ai/public_source/ee28c442-452c-4d0f-9fe2-04b048314390/123a023a5-74c3-4688-bb07-a055e2a6e27e.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 2,
     title: 'Ereksi Konstruksi Baja',
     category: 'Ereksi',
-    image: 'https://image.qwenlm.ai/public_source/ee28c442-452c-4d0f-9fe2-04b048314390/1ae88c2aa-3d52-4fa0-9044-bbd6032aaa26.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 3,
     title: 'Bangunan Pabrik & Gudang',
     category: 'Pabrik',
-    image: 'https://image.qwenlm.ai/public_source/ee28c442-452c-4d0f-9fe2-04b048314390/112b551e3-9e8c-486d-b41e-1af01ccdb82a.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 4,
     title: 'Pemasangan Rangka Atap',
     category: 'Atap',
-    image: 'https://image.qwenlm.ai/public_source/ee28c442-452c-4d0f-9fe2-04b048314390/146e09f5d-b015-4f0d-a8a2-2eb92df144bf.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 5,
     title: 'Bangunan Komersial / Ruko',
     category: 'Komersial',
-    image: 'https://image.qwenlm.ai/public_source/ee28c442-452c-4d0f-9fe2-04b048314390/16708be39-f0ee-47d1-83f5-522db8cdad75.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 6,
     title: 'Pemasangan Ducting & Piping',
     category: 'Ducting',
-    image: 'https://image.qwenlm.ai/public_source/ee28c442-452c-4d0f-9fe2-04b048314390/1cd3dc6e1-dd7e-46a4-87ca-d24e9f45d1a7.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 7,
     title: 'Silo & Conveyor System',
     category: 'Industrial',
-    image: 'https://image.qwenlm.ai/public_source/ee28c442-452c-4d0f-9fe2-04b048314390/11cc20917-c795-42af-ba8e-27ca218e6cf6.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 8,
     title: 'Rumah Tinggal Baja Ringan',
     category: 'Residensial',
-    image: 'https://image.qwenlm.ai/public_source/ee28c442-452c-4d0f-9fe2-04b048314390/18855382c-1786-4596-9401-db7da9b3697f.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
 ];
 
 // ✅ FOTO FITUR — foto untuk section hero & highlight (terpisah dari galeri)
 //    Ganti URL di bawah dengan foto asli proyek Anda
+//    Contoh: image: '/assets/images/nama-file-anda.png'
 const FEATURE_PHOTOS = [
   {
     id: 'feat-1',
     label: 'Fabrikasi Struktur Baja',
-    image: 'https://image.qwenlm.ai/public_source/d2a328b8-efa2-49ec-8736-42cb19146e5c/1e736e08e-c656-4c23-abce-af65cec3c2be.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 'feat-2',
     label: 'Pemasangan Konstruksi Baja',
-    image: 'https://image.qwenlm.ai/public_source/d2a328b8-efa2-49ec-8736-42cb19146e5c/10fdde285-e246-40af-a2a2-82cd42db1851.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 'feat-3',
     label: 'Renovasi Pabrik & Gudang',
-    image: 'https://image.qwenlm.ai/public_source/d2a328b8-efa2-49ec-8736-42cb19146e5c/1a57a2955-275e-41d7-8956-19056b524881.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 'feat-4',
     label: 'Struktur Rangka Atap',
-    image: 'https://image.qwenlm.ai/public_source/d2a328b8-efa2-49ec-8736-42cb19146e5c/135821b90-01a2-4b04-a642-bfc773ce6898.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 'feat-5',
     label: 'Bangunan Komersial',
-    image: 'https://image.qwenlm.ai/public_source/d2a328b8-efa2-49ec-8736-42cb19146e5c/1b28ae82d-9f6b-4e9c-a6ea-b03c56e2ff85.png',
+    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
   },
 ];
 
