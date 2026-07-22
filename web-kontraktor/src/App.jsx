@@ -53,13 +53,13 @@ const PROJECT_GALLERY = [
     id: 1,
     title: 'Fabrikasi Struktur Baja',
     category: 'Fabrikasi',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
+    image: '/assets/images/Logo.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 2,
     title: 'Ereksi Konstruksi Baja',
     category: 'Ereksi',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
+    image: '/assets/images/Logo.png', // Ganti dengan foto proyek Anda
   },
   {
     id: 3,
