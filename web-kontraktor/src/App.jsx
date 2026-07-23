@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { MessageCircle, ChevronDown, MapPin, Handshake, Camera, X, Menu, Image as ImageIcon, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { MessageCircle, ChevronDown, MapPin, Handshake, Camera, X, Menu, Image as ImageIcon, ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react';
 
 /* ---------------------------------- DATA --------------------------------- */
 
@@ -46,91 +46,101 @@ const CLIENTS = [
   'Rumah Tinggal Bapak', 'Kos Bapak Adi Wiyung', 'Show Room Mitra Niaga Motor',
 ];
 
-// ✅ DATA GALERI PROYEK — tambahkan foto hasil proyek di sini
-//    Ganti URL dengan gambar lokal: image: '/assets/images/nama-file.png'
+/* ==========================================================================
+   ✅ DATA GALERI PROYEK — Berdasarkan Dokumentasi Asli Anda
+   ========================================================================== */
+
 const PROJECT_GALLERY = [
-  {
-    id: 1,
-    title: 'Fabrikasi Struktur Baja',
-    category: 'Fabrikasi',
-    image: '/assets/images/Logo.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 2,
-    title: 'Ereksi Konstruksi Baja',
-    category: 'Ereksi',
-    image: '/assets/images/Logo.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 3,
-    title: 'Bangunan Pabrik & Gudang',
-    category: 'Pabrik',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 4,
-    title: 'Pemasangan Rangka Atap',
-    category: 'Atap',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 5,
-    title: 'Bangunan Komersial / Ruko',
-    category: 'Komersial',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 6,
-    title: 'Pemasangan Ducting & Piping',
-    category: 'Ducting',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 7,
-    title: 'Silo & Conveyor System',
-    category: 'Industrial',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 8,
-    title: 'Rumah Tinggal Baja Ringan',
-    category: 'Residensial',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
+  { id: 1,  title: 'Konstruksi Baja', category: 'Konstruksi Baja', image: '/assets/images/Konstruksi Baja (1).png' },
+  { id: 2,  title: 'Konstruksi Baja', category: 'Konstruksi Baja', image: '/assets/images/Konstruksi Baja (2).png' },
+  { id: 3,  title: 'Konstruksi Baja', category: 'Konstruksi Baja', image: '/assets/images/Konstruksi Baja (3).png' },
+  { id: 4,  title: 'Konstruksi Baja', category: 'Konstruksi Baja', image: '/assets/images/Konstruksi Baja (4).png' },
+  { id: 5,  title: 'Konstruksi Baja', category: 'Konstruksi Baja', image: '/assets/images/Konstruksi Baja (5).png' },
+  { id: 6,  title: 'Konstruksi Baja', category: 'Konstruksi Baja', image: '/assets/images/Konstruksi Baja (6).png' },
+
+  { id: 7,  title: 'Pemasangan Ducting — PT Kuda Laut Mas', category: 'Ducting & Perpipaan', image: '/assets/images/Pek Ducting Kudalaut Mas (1).png' },
+  { id: 8,  title: 'Ducting Industri — Sistem Ventilasi Pabrik', category: 'Ducting & Perpipaan', image: '/assets/images/Pek Ducting Kudalaut Mas (2).png' },
+  { id: 9,  title: 'Ducting Exhaust — Instalasi Pabrik', category: 'Ducting & Perpipaan', image: '/assets/images/Pek Ducting Kudalaut Mas (3).png' },
+  { id: 10, title: 'Ducting System — Hasil Pemasangan', category: 'Ducting & Perpipaan', image: '/assets/images/Pek Ducting Kudalaut Mas (4).png' },
+  { id: 11, title: 'Sistem Perpipaan — PT Kualimas Aditama', category: 'Ducting & Perpipaan', image: '/assets/images/Perpipaan Kualinas (1).png' },
+  { id: 12, title: 'Perpipaan Industri — Instalasi Pabrik', category: 'Ducting & Perpipaan', image: '/assets/images/Perpipaan Kualinas (2).png' },
+  { id: 13, title: 'Perpipaan Tekanan — Pemasangan Rapi', category: 'Ducting & Perpipaan', image: '/assets/images/Perpipaan Kualinas (3).png' },
+  { id: 14, title: 'Sistem Perpipaan — Hasil Akhir', category: 'Ducting & Perpipaan', image: '/assets/images/Perpipaan Kualinas (4).png' },
+
+  { id: 15, title: 'Pembuatan Silo — PT Kualimas Aditama', category: 'Silo & Conveyor', image: '/assets/images/Pembuatan Silo Kualimas Aditama (1).png' },
+  { id: 16, title: 'Silo Industri — Struktur Baja', category: 'Silo & Conveyor', image: '/assets/images/Pembuatan Silo Kualimas Aditama (2).png' },
+  { id: 17, title: 'Silo Penyimpanan — Hasil Pengerjaan', category: 'Silo & Conveyor', image: '/assets/images/Pembuatan Silo Kualimas Aditama (3).png' },
+  { id: 18, title: 'Konveyor Belt — PT Kualimas Aditama', category: 'Silo & Conveyor', image: '/assets/images/Konveyor Belt  Kualimas (1).png' },
+  { id: 19, title: 'Sistem Conveyor — Instalasi Pabrik', category: 'Silo & Conveyor', image: '/assets/images/Konveyor Belt  Kualimas (2).png' },
+
+  { id: 20, title: 'Pabrik Ducting — PT Kuda Laut Mas', category: 'Pabrik & Gedung', image: '/assets/images/Pek Blower Kudalaut Mas (1).png' },
+  { id: 21, title: 'Blower System — Instalasi Pabrik', category: 'Pabrik & Gedung', image: '/assets/images/Pek Blower Kudalaut Mas (2).png' },
+  { id: 22, title: 'Sistem Blower — Pemasangan Lengkap', category: 'Pabrik & Gedung', image: '/assets/images/Pek Blower Kudalaut Mas (3).png' },
+  { id: 23, title: 'Blower Industri — Hasil Akhir', category: 'Pabrik & Gedung', image: '/assets/images/Pek Blower Kudalaut Mas (4).png' },
+  { id: 24, title: 'Peninggian Gedung — PT Indraco Jaya', category: 'Pabrik & Gedung', image: '/assets/images/Peninggian Gedung Indraco Jaya (1).png' },
+  { id: 25, title: 'Peninggian Gedung — Proses Pengerjaan', category: 'Pabrik & Gedung', image: '/assets/images/Peninggian Gedung Indraco Jaya (2).png' },
+  { id: 26, title: 'Peninggian Gedung — Struktur Baru', category: 'Pabrik & Gedung', image: '/assets/images/Peninggian Gedung Indraco Jaya (3).png' },
+  { id: 27, title: 'Peninggian Gedung — Tahap Lanjut', category: 'Pabrik & Gedung', image: '/assets/images/Peninggian Gedung Indraco Jaya (4).png' },
+  { id: 28, title: 'Peninggian Gedung — Hasil Akhir', category: 'Pabrik & Gedung', image: '/assets/images/Peninggian Gedung Indraco Jaya (5).png' },
+  { id: 29, title: 'Mess Karyawan — PT Indraco Jaya', category: 'Pabrik & Gedung', image: '/assets/images/Mess Karyawan Indraco Jaya (1).png' },
+  { id: 30, title: 'Fasilitas Karyawan — Bangunan Pabrik', category: 'Pabrik & Gedung', image: '/assets/images/Mess Karyawan Indraco Jaya (2).png' },
+  { id: 31, title: 'Pekerjaan Ledel — PT Jatim Taman Steel', category: 'Pabrik & Gedung', image: '/assets/images/Pek Ledel JTS (1).png' },
+
+  { id: 32, title: 'Dust Collector — PT Kualimas Aditama', category: 'Dust Collector', image: '/assets/images/Pekerjaan Dustcolektor Kualimas Aditama (1).png' },
+  { id: 33, title: 'Sistem Dust Collector — Instalasi', category: 'Dust Collector', image: '/assets/images/Pekerjaan Dustcolektor Kualimas Aditama (2).png' },
+  { id: 34, title: 'CO Chamber — PT Jatim Taman Steel', category: 'Dust Collector', image: '/assets/images/CO Chamber JTS (1).png' },
+  { id: 35, title: 'CO Chamber — Sistem Filtrasi', category: 'Dust Collector', image: '/assets/images/CO Chamber JTS (2).png' },
+  { id: 36, title: 'CO Chamber — Hasil Pemasangan', category: 'Dust Collector', image: '/assets/images/CO Chamber JTS (3).png' },
+
+  // ✅ Hapus id 37-39 (Dak) — hanya tersisa Jembatan Forklift
+  { id: 37, title: 'Jembatan Forklift — PT Kuda Laut Mas', category: 'Jembatan Forklift', image: '/assets/images/Pembuatan Jembatan Forklift Kudalaut Mas (1).png' },
+  { id: 38, title: 'Jembatan Forklift — Struktur Baja', category: 'Jembatan Forklift', image: '/assets/images/Pembuatan Jembatan Forklift Kudalaut Mas (2).png' },
+  { id: 39, title: 'Jembatan Forklift — Hasil Akhir', category: 'Jembatan Forklift', image: '/assets/images/Pembuatan Jembatan Forklift Kudalaut Mas (3).png' },
+
+  { id: 40, title: 'Renovasi Rumah Tinggal — Tampak Depan', category: 'Renovasi Rumah', image: '/assets/images/Renovasi Rumah Tinggal (1).png' },
+  { id: 41, title: 'Renovasi Rumah — Proses Pengerjaan', category: 'Renovasi Rumah', image: '/assets/images/Renovasi Rumah Tinggal (2).png' },
+  { id: 42, title: 'Renovasi Rumah — Struktur Baja', category: 'Renovasi Rumah', image: '/assets/images/Renovasi Rumah Tinggal (3).png' },
+  { id: 43, title: 'Renovasi Rumah — Pemasangan Atap', category: 'Renovasi Rumah', image: '/assets/images/Renovasi Rumah Tinggal (4).png' },
+  { id: 44, title: 'Renovasi Rumah — Tahap Finishing', category: 'Renovasi Rumah', image: '/assets/images/Renovasi Rumah Tinggal (5).png' },
+  { id: 45, title: 'Renovasi Rumah — Hasil Renovasi', category: 'Renovasi Rumah', image: '/assets/images/Renovasi Rumah Tinggal (6).png' },
+  { id: 46, title: 'Renovasi Rumah — Tampak Akhir', category: 'Renovasi Rumah', image: '/assets/images/Renovasi Rumah Tinggal (7).png' },
+
+  { id: 47, title: 'Renovasi Gedung — PT Jatim Taman Steel', category: 'Renovasi Pabrik', image: '/assets/images/Renovasi JTS 1.png' },
+  { id: 48, title: 'Renovasi Pabrik — Struktur Baru', category: 'Renovasi Pabrik', image: '/assets/images/Renovasi JTS 2.png' },
+  { id: 49, title: 'Renovasi Dak Lt.2 — PT Indraco Jaya', category: 'Renovasi Pabrik', image: '/assets/images/Renov dak Lt.2 Indraco Jaya (1).png' },
+  { id: 50, title: 'Renovasi Dak — Hasil Pengerjaan', category: 'Renovasi Pabrik', image: '/assets/images/Renov dak Lt.2 Indraco Jaya (2).png' },
+
+  { id: 51, title: 'Meja Kerja Produksi — PT Jatim Taman Steel', category: 'Fasilitas Produksi', image: '/assets/images/Meja Kerja Produksi JTS (1).png' },
+  { id: 52, title: 'Meja Kerja — Fabrikasi Baja', category: 'Fasilitas Produksi', image: '/assets/images/Meja Kerja Produksi JTS (2).png' },
+  { id: 53, title: 'Meja Kerja Produksi — Hasil Akhir', category: 'Fasilitas Produksi', image: '/assets/images/Meja Kerja Produksi JTS (3).png' },
+
+  { id: 54, title: 'Pengecoran — Pekerjaan Pondasi', category: 'Pekerjaan Sipil', image: '/assets/images/Pengecoran 1.png' },
+  { id: 55, title: 'Pengecoran — Proses Cor Beton', category: 'Pekerjaan Sipil', image: '/assets/images/Pengecoran 2.png' },
 ];
 
-// ✅ FOTO FITUR — foto untuk section hero & highlight (terpisah dari galeri)
-//    Ganti URL di bawah dengan foto asli proyek Anda
-//    Contoh: image: '/assets/images/nama-file-anda.png'
+// ✅ FOTO FITUR
 const FEATURE_PHOTOS = [
-  {
-    id: 'feat-1',
-    label: 'Fabrikasi Struktur Baja',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 'feat-2',
-    label: 'Pemasangan Konstruksi Baja',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 'feat-3',
-    label: 'Renovasi Pabrik & Gudang',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 'feat-4',
-    label: 'Struktur Rangka Atap',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
-  {
-    id: 'feat-5',
-    label: 'Bangunan Komersial',
-    image: '/assets/images/hero.png', // Ganti dengan foto proyek Anda
-  },
+  { id: 'feat-1', label: 'Konstruksi Baja Profesional', image: '/assets/images/Konstruksi Baja (4).png' },
+  { id: 'feat-2', label: 'Pemasangan Ducting Industri', image: '/assets/images/Pek Ducting Kudalaut Mas (1).png' },
+  { id: 'feat-3', label: 'Renovasi Pabrik & Gedung', image: '/assets/images/Peninggian Gedung Indraco Jaya (2).png' },
+  { id: 'feat-4', label: 'Silo & Conveyor System', image: '/assets/images/Pembuatan Silo Kualimas Aditama (2).png' },
+  { id: 'feat-5', label: 'Renovasi Rumah Tinggal', image: '/assets/images/Renovasi Rumah Tinggal (7).png' },
 ];
 
-const GALLERY_CATEGORIES = ['Semua', 'Fabrikasi', 'Ereksi', 'Pabrik', 'Atap', 'Komersial', 'Ducting', 'Industrial', 'Residensial'];
+// ✅ GALLERY_CATEGORIES — 'Dak & Jembatan' diubah menjadi 'Jembatan Forklift'
+const GALLERY_CATEGORIES = [
+  'Semua',
+  'Konstruksi Baja',
+  'Ducting & Perpipaan',
+  'Silo & Conveyor',
+  'Pabrik & Gedung',
+  'Dust Collector',
+  'Jembatan Forklift',
+  'Renovasi Rumah',
+  'Renovasi Pabrik',
+  'Fasilitas Produksi',
+  'Pekerjaan Sipil',
+];
 
 const ADDRESS = 'Jl. Cempaka Putih RT005/RW001, Kelurahan Popoh, Kec. Wonoayu, Kab. Sidoarjo, Jawa Timur 61261';
 const WA_NUMBER = '6285655223839';
@@ -211,9 +221,16 @@ function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/95 backdrop-blur-sm">
       <div className="mx-auto flex max-w-xl items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-[10px] font-extrabold text-amber-400">LJM</div>
-          <span className="text-sm font-bold uppercase tracking-wide text-slate-900">Liwon Jaya Makmur</span>
+        <div className="flex items-center gap-3">
+          {/* ✅ LOGO HEADER — diperbesar agar lebih jelas */}
+          <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-full bg-white shadow-md">
+            <img
+              src="/assets/images/Logo.png"
+              alt="Logo Liwon Jaya Makmur"
+              className="h-full w-full object-contain"
+            />
+          </div>
+          <span className="text-sm font-bold uppercase tracking-wide text-slate-900 leading-tight">Liwon Jaya<br className="sm:hidden" /> Makmur</span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -234,7 +251,6 @@ function Header() {
         </div>
       </div>
 
-      {/* Mobile Nav Drawer */}
       <div
         className={`overflow-hidden border-t border-slate-100 bg-white transition-[max-height,opacity] duration-300 ${
           menuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
@@ -276,13 +292,34 @@ function FloatingWhatsApp() {
 
 /* ----------------------------- GALLERY SECTION ---------------------------- */
 
+// Fisher-Yates shuffle
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 function GallerySection() {
   const [activeCategory, setActiveCategory] = useState('Semua');
   const [lightbox, setLightbox] = useState(null);
 
-  const filtered = activeCategory === 'Semua'
-    ? PROJECT_GALLERY
-    : PROJECT_GALLERY.filter((p) => p.category === activeCategory);
+  // ✅ Acak galeri saat pertama kali load (berubah tiap refresh)
+  const [shuffledGallery, setShuffledGallery] = useState(() => shuffleArray(PROJECT_GALLERY));
+
+  const handleShuffle = () => {
+    setShuffledGallery(shuffleArray(PROJECT_GALLERY));
+  };
+
+  // Saat filter "Semua" → tampilkan hanya 6 gambar acak dari seluruh kategori
+  const filtered = useMemo(() => {
+    if (activeCategory === 'Semua') {
+      return shuffledGallery.slice(0, 6);
+    }
+    return PROJECT_GALLERY.filter((p) => p.category === activeCategory);
+  }, [activeCategory, shuffledGallery]);
 
   const openLightbox = (project) => setLightbox(project);
   const closeLightbox = () => setLightbox(null);
@@ -324,6 +361,22 @@ function GallerySection() {
           ))}
         </div>
       </div>
+
+      {/* Info bar untuk mode "Semua" */}
+      {activeCategory === 'Semua' && (
+        <div className="mt-4 flex items-center justify-between gap-2 rounded-xl bg-amber-50 px-4 py-3">
+          <div className="flex items-center gap-2 text-xs text-amber-700">
+            <RefreshCw size={14} className="animate-spin-slow" />
+            <span className="font-semibold">Menampilkan 6 foto acak dari semua kategori</span>
+          </div>
+          <button
+            onClick={handleShuffle}
+            className="flex items-center gap-1 rounded-lg bg-amber-500 px-3 py-1.5 text-[11px] font-bold uppercase text-white transition-colors hover:bg-amber-600"
+          >
+            <RefreshCw size={12} /> Acak Ulang
+          </button>
+        </div>
+      )}
 
       {/* Photo Grid */}
       <div className="mt-6 grid grid-cols-2 gap-3">
@@ -409,6 +462,13 @@ function App() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
         .ljm-simple { font-family: 'Poppins', sans-serif; }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 3s linear infinite;
+        }
       `}</style>
 
       <Header />
@@ -428,7 +488,7 @@ function App() {
           </p>
         </section>
 
-        {/* ✅ Gunakan FEATURE_PHOTOS (terpisah dari PROJECT_GALLERY) */}
+        {/* FEATURE PHOTOS */}
         <div className="mt-8 space-y-4">
           <PhotoBlock label={FEATURE_PHOTOS[0].label} image={FEATURE_PHOTOS[0].image} />
           <PhotoBlock label={FEATURE_PHOTOS[1].label} image={FEATURE_PHOTOS[1].image} />
@@ -440,7 +500,7 @@ function App() {
           <BulletList items={WHY_STEEL} />
         </section>
 
-        {/* ✅ Gunakan FEATURE_PHOTOS (terpisah dari PROJECT_GALLERY) */}
+        {/* FEATURE PHOTOS */}
         <div className="mt-8 space-y-4">
           <PhotoBlock label={FEATURE_PHOTOS[2].label} image={FEATURE_PHOTOS[2].image} />
           <PhotoBlock label={FEATURE_PHOTOS[3].label} image={FEATURE_PHOTOS[3].image} />
@@ -489,12 +549,7 @@ function App() {
           <BulletList items={SERVICES} />
         </section>
 
-        {/* ============================================ */}
-        {/* ✅ GALERI PROYEK — posisi ideal: setelah     */}
-        {/*    Layanan & sebelum section Klien/Trust.    */}
-        {/*    Alasan: user sudah tahu layanan apa yang  */}
-        {/*    ditawarkan, sekarang lihat bukti hasilnya.*/}
-        {/* ============================================ */}
+        {/* GALERI PROYEK */}
         <GallerySection />
 
         <hr className="mx-auto mt-12 max-w-[120px] border-slate-300" />
