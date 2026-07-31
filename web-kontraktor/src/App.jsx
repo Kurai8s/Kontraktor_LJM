@@ -519,9 +519,9 @@ function App() {
         <section className="mt-12 text-center">
           <Heading>Wilayah Layanan</Heading>
           <div className="mx-auto mt-4 max-w-sm">
-            <p className="font-bold text-slate-900">Sidoarjo &amp; Jawa Timur</p>
+            <p className="font-bold text-slate-900">Seluruh Indonesia</p>
             <p className="mt-1 text-[15px] leading-relaxed text-slate-600">
-              CV Liwon Jaya Makmur melayani proyek konstruksi baja di Sidoarjo, Surabaya, dan sekitar wilayah Jawa Timur.
+              CV Liwon Jaya Makmur melayani proyek konstruksi baja di seluruh Indonesia.
             </p>
           </div>
         </section>
