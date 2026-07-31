@@ -230,7 +230,7 @@ function Header() {
               className="h-full w-full object-contain"
             />
           </div>
-          <span className="text-sm font-bold uppercase tracking-wide text-slate-900 leading-tight">Liwon Jaya<br className="sm:hidden" /> Makmur</span>
+          <span className="text-sm font-bold uppercase tracking-wide text-slate-900 leading-tight">CV Liwon Jaya<br className="sm:hidden" /> Makmur</span>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -341,7 +341,7 @@ function GallerySection() {
   return (
     <section id="galeri" className="mt-14">
       <Heading>Galeri Proyek Kami</Heading>
-      <SubHeading>Dokumentasi hasil pengerjaan proyek konstruksi baja oleh tim Liwon Jaya Makmur.</SubHeading>
+      <SubHeading>Dokumentasi hasil pengerjaan proyek konstruksi baja oleh tim CV Liwon Jaya Makmur.</SubHeading>
 
       {/* Category Filter */}
       <div className="mt-6 -mx-6 overflow-x-auto px-6 pb-2">
@@ -481,7 +481,7 @@ function App() {
             Jasa Konstruksi Baja &amp; Bangunan Profesional
           </h1>
           <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-slate-600">
-            <span className="font-bold text-slate-900">Liwon Jaya Makmur</span> menghadirkan layanan konstruksi baja dan bangunan dengan material berkualitas tinggi. Proses pengerjaan efisien dan hasil yang tahan lama. Cocok untuk pabrik, gudang, ruko, hingga rumah tinggal.
+            <span className="font-bold text-slate-900">CV Liwon Jaya Makmur</span> menghadirkan layanan konstruksi baja dan bangunan dengan material berkualitas tinggi. Proses pengerjaan efisien dan hasil yang tahan lama. Cocok untuk pabrik, gudang, ruko, hingga rumah tinggal.
           </p>
           <p className="mx-auto mt-3 max-w-md text-[15px] leading-relaxed text-slate-600">
             Dikerjakan oleh tim profesional berpengalaman sejak 2007 untuk memastikan struktur bangunan yang kokoh dan efisien.
@@ -521,14 +521,14 @@ function App() {
           <div className="mx-auto mt-4 max-w-sm">
             <p className="font-bold text-slate-900">Sidoarjo &amp; Jawa Timur</p>
             <p className="mt-1 text-[15px] leading-relaxed text-slate-600">
-              Liwon Jaya Makmur melayani proyek konstruksi baja di Sidoarjo, Surabaya, dan sekitar wilayah Jawa Timur.
+              CV Liwon Jaya Makmur melayani proyek konstruksi baja di Sidoarjo, Surabaya, dan sekitar wilayah Jawa Timur.
             </p>
           </div>
         </section>
 
         {/* WHY US */}
         <section className="mt-12 text-center">
-          <Heading>Kenapa Memilih Liwon Jaya Makmur?</Heading>
+          <Heading>Kenapa Memilih CV Liwon Jaya Makmur?</Heading>
           <BulletList items={WHY_US} />
         </section>
 
@@ -545,7 +545,7 @@ function App() {
 
         {/* SERVICES LIST */}
         <section id="layanan" className="mt-14 text-center">
-          <Heading>Produk dan Layanan Unggulan Liwon Jaya Makmur</Heading>
+          <Heading>Produk dan Layanan Unggulan CV Liwon Jaya Makmur</Heading>
           <BulletList items={SERVICES} />
         </section>
 
